@@ -29,6 +29,7 @@ def get_sales_data():
             break
 
     return sales_data
+
 def validate_data(values):
     """
     Inside the try, convert all string values into integers. 
@@ -57,6 +58,16 @@ def update_sales_worksheet(data):
     sales_worksheet.append_row(data)
     print('sales worksheet update successfully')
 
+
+def update_surplus_worksheet(data):
+    """
+    update surplus worksheet, add new row with the list data provided.
+    """
+    print("update surplus worksheet....\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+    surplus_worksheet.append_row(data)
+    print('surplus worksheet update successfully')
+
 def calculate_surplus_data(sales_row):
     """
     Compare sales with stock and calculate the surplus for each item type.
@@ -82,6 +93,8 @@ def main():
     data = get_sales_data()
     sales_data = [int(num) for num in data]
     update_sales_worksheet(sales_data)
+    surplus_data = [int(num) for num in data]
+    update_surplus_worksheet(surplus_data)
     new_surplus_data = calculate_surplus_data(sales_data)
     print(new_surplus_data)
 
